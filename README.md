@@ -1,2 +1,2 @@
 # fullstack-js-unit-8
-project using a database
+CRUD operations using express and sequelize for a library web application
