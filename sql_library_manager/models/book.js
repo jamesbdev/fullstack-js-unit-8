@@ -1,6 +1,9 @@
 'use strict';
 
-const sequelize = require("index.js");
+const { db } = require("index.js");
+
+const sequelize = db.sequelize;
+const Sequelize = db.Sequelize;
 
 const {
   Model
@@ -41,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 
 (async () => {
+  console.log(123);
   try {
     await Book.sync();
     console.log('Book table has been synchronised');
