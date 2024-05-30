@@ -12,8 +12,13 @@ router.get('/books', function(req, res, next){
   res.render('index', {title: 'Books'});
 })
 
-router.get('/new-book', function(req, res, next) {
+router.get('/books/new', function(req, res, next) {
   res.render('new-book', {title: 'New Book'});
+})
+
+router.post('/books/new', function(req, res, next) {
+  //post new book to database
+  //create new book entry
 })
 
 module.exports = router;
