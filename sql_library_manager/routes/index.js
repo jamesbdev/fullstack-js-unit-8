@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+const book = require("../models/book");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,7 +15,7 @@ router.get('/books', function(req, res, next){
     //pass in book object
     //loop through book object entries
     //display books info
-})
+}) 
 
 //get the new book page
 router.get('/books/new', function(req, res, next) {
