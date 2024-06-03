@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+// import Sequelize
+var sequelize = require('../models').sequelize; 
+//import Book model
 const Book = require("../models/").Book;
 
 /* GET home page. */
@@ -9,12 +12,19 @@ router.get('/', function(req, res, next) {
 });
 
 //show home page with list of books
-router.get('/books', function(req, res, next){
-  res.render('index', {title: 'Books'});
-  //display list of books
-    //pass in book object
-    //loop through book object entries
-    //display books info
+router.get('/books', async function(req, res, next){
+  //display all books
+  try {
+    const books = await Book.findAll();
+    console.log(books);
+    res.render('index', {title: "Books", books: books });
+  } catch (error) {
+    console.log('There is an error', error);
+  }
+
+   
+   
+
 }) 
 
 //get the new book page

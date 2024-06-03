@@ -69,12 +69,14 @@ app.use(function(err, req, res, next) {
     console.log('Connection to database successful');
     
     const books = await Book.findAll();
-    console.log(books); 
+    //console.log(books); 
     
   } catch(error) {
     console.log('error connecting to the database', error);
   }
 }) ();
+
+
 
 
 
