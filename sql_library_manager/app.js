@@ -8,10 +8,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+// import Sequelize
+var sequelize = require('./models').sequelize; 
+//import Book model 
+const Book = require('./models').Book;
 
-//var bookModel = require('./models/book');
 
-//import { Book } from './models/book';
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -32,7 +37,7 @@ app.use(function(req, res, next) {
   error.status = 404;
   res.locals.message = error.message;
   res.render('page-not-found', {error: error});
-  //next(createError(404));
+ 
   next();
 });
 
@@ -53,6 +58,23 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { err });
 });
+
+//synchronize database
+(async () => {
+  try {
+    await Book.sync();
+    console.log('Book table has been synchronised');
+
+    await sequelize.authenticate();
+    console.log('Connection to database successful');
+    
+    const books = await Book.findAll();
+    console.log(books); 
+    
+  } catch(error) {
+    console.log('error connecting to the database', error);
+  }
+}) ();
 
 
 
