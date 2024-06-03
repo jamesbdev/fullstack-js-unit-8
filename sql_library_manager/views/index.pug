@@ -2,8 +2,21 @@ extends layout
 
 block content
   h1= title
+  table 
+    thead
+      tr
+        th Title 
+        th Author 
+        th Genre 
+        th Year
+    tbody 
+      each book in books 
+        tr 
+          td 
+            a(href="/book:id")= book.title
+          td=book.author
+          td=book.genre 
+          td=book.year
   a(href="/books/new" class="button") create new book
-  ul 
-    each book in books 
-      li=book.title 
+ 
 
