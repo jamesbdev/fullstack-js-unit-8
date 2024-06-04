@@ -49,7 +49,7 @@ router.post('/books/new', async function(req, res, next) {
   // post data to database
   // create entry in sequelize
   console.log(req.body);
-  res.send('form submited');
+  res.send('book entry added');
 
 
 })
