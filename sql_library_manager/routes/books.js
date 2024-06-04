@@ -6,11 +6,6 @@ var sequelize = require('../models').sequelize;
 //import Book model
 const Book = require("../models/").Book;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.redirect('/books');
-});
-
 //show home page with list of books
 router.get('/books', async function(req, res, next){
   //display all books
