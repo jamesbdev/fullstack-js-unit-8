@@ -31,24 +31,14 @@ router.get('/books/new', function(req, res, next) {
 
 //create book route
 router.post('/books/new', async function(req, res, next) {
-  //post new book to database
-  const title = req.body.title;
-  const author = req.body.author;
-  const genre = req.body.genre;
-  const year = req.body.year;
-
+  //create book entry
   try {
-    console.log(req.body);
-    const book = await Book.create();
+    const book = await Book.create(req.body);
 
   } catch (error) {
     console.log("there was an error", error);
   }
-  // create new book entry
-  // get the data from the form
-  // post data to database
-  // create entry in sequelize
-  console.log(req.body);
+
   res.send('book entry added');
 
 
