@@ -54,10 +54,19 @@ router.get('/books/:id', async function(req, res, next) {
   const bookId = req.params.id;
   try {
     const book = await Book.findByPk(bookId);
+    const errorMessage = "Sorry, this book entry is invalid";
+
     //render update template and pass book, bookId and title variables
-    res.render('update-book', {title: 'Update Book', book , bookId});
-  } catch {
-    console.log("Sorry, there was an error when displaying the Update book template", error);
+    if (book != null ) {
+      res.render('update-book', {title: 'Update Book', book , bookId});
+    } else {
+      console.log("book does not exist");
+      res.render('page-not-found', {message: errorMessage})
+    }
+
+  } catch (error) {
+    console.log("Sorry, there was an error when displaying the Update book template:", error);
+    
   }
 
 })
