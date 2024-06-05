@@ -2,6 +2,8 @@ extends layout
 
 block content
   h1= title
+  p        
+    a(href="/books/new" class="button") create new book
   table 
     thead
       tr
@@ -17,6 +19,6 @@ block content
           td=book.author
           td=book.genre 
           td=book.year
-  a(href="/books/new" class="button") create new book
+
  
 
