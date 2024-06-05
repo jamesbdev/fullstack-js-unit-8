@@ -41,22 +41,49 @@ router.post('/books/new', async function(req, res, next) {
 
   res.send('book entry added');
 
-
 })
 
 //get the update book page
-router.get('/books/:id', function(req, res, next) {
-  res.render('update-book', {title: 'Update Book'});
+router.get('/books/:id', async function(req, res, next) {
+  //get book ID from params
+  const bookId = req.params.id;
+  try {
+    const book = await Book.findByPk(bookId);
+    //render update template and pass book, bookId and title variables
+    res.render('update-book', {title: 'Update Book', book , bookId});
+  } catch {
+    console.log("Sorry, there was an error when displaying the Update book template", error);
+  }
+
 })
 
 //update book route
-router.post('/books/:id', function(req, res, next) {
+router.post('/books/:id', async function(req, res, next) {
   //update book
+  try {
+    const book = await Book.findByPk(req.params.id);
+    //update book entry with new information
+    await book.update(req.body);
+    //display confirmation message
+    res.send("Book has been updated");
+  } catch (error) {
+    console.log("there is an error", error);
+  }
 })
 
 //delete book route
-router.post('/books/:id/delete', function(req, res, next) {
-  //delete a book 
+router.post('/books/:id/delete', async function(req, res, next) {
+  //store ID from the URL
+  const bookId = req.params.id;
+  try {
+    const book = await Book.findByPk(bookId);
+    //remove entry
+    book.destroy();
+    //send confirmation message
+    res.send("Book has been deleted from database");
+  } catch (error) {
+    console.log("Sorry there is an error deleting the book", error);
+  }
 })
 
 module.exports = router;
