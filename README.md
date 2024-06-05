@@ -5,4 +5,4 @@ Library application where the user can view a database of books, create a new en
 
 ## technologies 
 
-This project uses Express for the back end and Sequelize to interact with sql database
+This project uses Express for the back-end and Sequelize to interact with an SQL database
