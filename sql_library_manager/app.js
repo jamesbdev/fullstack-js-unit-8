@@ -43,9 +43,10 @@ app.use(function(req, res, next) {
 
 
 
-// error handler
+// Global error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+
+  //set error message
   if (err.message == null || err.message == "") {
     err.message = "Sorry! There was an unexpected error on the server.";
   }
@@ -54,6 +55,7 @@ app.use(function(err, req, res, next) {
 
   console.log(err.status, "error status");
   console.log(err.message, "error message");
+
   // render the error page
   res.status(err.status || 500);
   res.render('error', { err });
@@ -69,18 +71,11 @@ app.use(function(err, req, res, next) {
     console.log('Connection to database successful');
     
     const books = await Book.findAll();
-    //console.log(books); 
     
   } catch(error) {
     console.log('error connecting to the database', error);
   }
 }) ();
-
-
-
-
-
-
 
 
 module.exports = app;

@@ -38,8 +38,8 @@ router.post('/books/new', async function(req, res, next) {
   } catch (error) {
     console.log("there was an error", error);
   }
-
-  res.send('book entry added');
+  //redirect to homepage
+  res.redirect('/books');
 
 })
 
@@ -64,8 +64,8 @@ router.post('/books/:id', async function(req, res, next) {
     const book = await Book.findByPk(req.params.id);
     //update book entry with new information
     await book.update(req.body);
-    //display confirmation message
-    res.send("Book has been updated");
+    //redirect to homepage
+    res.redirect('/books');
   } catch (error) {
     console.log("there is an error", error);
   }
@@ -79,8 +79,8 @@ router.post('/books/:id/delete', async function(req, res, next) {
     const book = await Book.findByPk(bookId);
     //remove entry
     book.destroy();
-    //send confirmation message
-    res.send("Book has been deleted from database");
+    //redirect to homepage
+    res.redirect('/books');
   } catch (error) {
     console.log("Sorry there is an error deleting the book", error);
   }
