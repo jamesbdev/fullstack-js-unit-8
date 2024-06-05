@@ -34,13 +34,18 @@ router.post('/books/new', async function(req, res, next) {
   //create book entry
   try {
     const book = await Book.create(req.body);
-
+    //redirect to homepage
+    res.redirect('/books');
   } catch (error) {
-    console.log("there was an error", error);
+    if(error.name === "SequelizeValidationError") {
+      //show template with form error
+      res.render('new-book', {title: "New Book", errors: error.errors})
+    } else {
+      console.log("there was an error", error);
+      //show global error template
+      res.render("error", err = error)
+    }
   }
-  //redirect to homepage
-  res.redirect('/books');
-
 })
 
 //get the update book page
@@ -67,7 +72,13 @@ router.post('/books/:id', async function(req, res, next) {
     //redirect to homepage
     res.redirect('/books');
   } catch (error) {
-    console.log("there is an error", error);
+    //check if error is Sequelize error 
+    if(error.name === "SequelizeValidationError") {
+      //show template with form error
+      res.render('update-book', {title: "Update Book", errors: error.errors})
+    } else {
+      console.log("Sorry, there is an error when updating the book", error);
+    }
   }
 })
 
@@ -84,6 +95,7 @@ router.post('/books/:id/delete', async function(req, res, next) {
   } catch (error) {
     console.log("Sorry there is an error deleting the book", error);
   }
+  
 })
 
 module.exports = router;

@@ -5,6 +5,14 @@ block content
   h1= title 
   
   form(method="post")
+    if errors 
+      h2(class="error") Error 
+      ul(class="error")
+        each error in errors 
+          if error.path == 'title'
+            li Title is required
+          else if error.path == 'author'
+            li Author is required
     p  
       label(for="title") title
       input(name="title" type="text" id="title")
