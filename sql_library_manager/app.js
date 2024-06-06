@@ -14,6 +14,8 @@ var app = express();
 var sequelize = require('./models').sequelize; 
 //import Book model 
 const Book = require('./models').Book;
+//import sequelize operator
+const { Op } = require('sequelize');
 
 
 // view engine setup
@@ -40,6 +42,46 @@ app.use(function(req, res, next) {
  
   next();
 });
+
+//search route 
+app.get('/search', async (req, res) => {
+  try {
+    //get the search query params
+    const searchQuery = req.query.q;
+    //sequelize query to return books with title, author, genre, year that match the search query
+    const books = await Book.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Oplike]: `%${searchQuery}%`,
+            },
+          },
+          {
+            author: {
+              [Oplike]: `%${searchQuery}%`,
+            },
+          }, 
+          {
+            genre: {
+              [Oplike]: `%${searchQuery}%`,
+            },
+          },
+          {
+            year: {
+              [Oplike]: `%${searchQuery}%`,
+            }
+          }
+        ]
+      }
+    })
+    //show index file and pass in books
+    res.render('/books', {books: books});
+  } catch (error) {
+    console.log('this search does not return a book');
+  }
+
+})
 
 
 

@@ -2,8 +2,13 @@ extends layout
 
 block content
   h1= title
+
   p        
     a(href="/books/new" class="button") create new book
+  form(method="get" action="/search")
+    label(for="site-search") Search for a book
+    input(type="search" placeholder="search..." name="q" id="site-search")
+    input(type="submit")
   table 
     thead
       tr
