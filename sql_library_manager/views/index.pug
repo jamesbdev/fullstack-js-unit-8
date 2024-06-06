@@ -5,10 +5,10 @@ block content
 
   p        
     a(href="/books/new" class="button") create new book
-  form(method="get" action="/search")
-    label(for="site-search") Search for a book
+  form(method="get" action="/search" class="search-form")
+    label(for="site-search" class="hide") Search for a book
     input(type="search" placeholder="search..." name="q" id="site-search")
-    input(type="submit")
+    input(type="submit" class="submit-btn")
   table 
     thead
       tr

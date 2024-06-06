@@ -95,3 +95,17 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+
+.hide {
+  display: none;
+}
+
+form input[type="submit"].submit-btn {
+  margin-left: 15px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
