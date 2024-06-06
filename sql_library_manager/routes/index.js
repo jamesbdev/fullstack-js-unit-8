@@ -32,14 +32,15 @@ router.get('/books/new', function(req, res, next) {
 //create book route
 router.post('/books/new', async function(req, res, next) {
   //create book entry
+  const enteredValues = req.body;
   try {
-    const book = await Book.create(req.body);
+    const book = await Book.create(enteredValues);
     //redirect to homepage
     res.redirect('/books');
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       //show template with form error
-      res.render('new-book', {title: "New Book", errors: error.errors})
+      res.render('new-book', {title: "New Book", errors: error.errors, enteredValues })
     } else {
       console.log("there was an error", error);
       //show global error template

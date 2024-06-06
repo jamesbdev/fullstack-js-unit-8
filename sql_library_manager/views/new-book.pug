@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1= title 
-  
+  h1= title  
+
   form(action="" method="post")
     if errors
       h2(class="error") Oops error! 
@@ -14,16 +14,28 @@ block content
             li Author is required
     p  
       label(for="title") Title
-      input(name="title" type="text" id="title")
+      if enteredValues
+        input(name="title" type="text" id="title" value=`${enteredValues.title}`)
+      else 
+        input(name="title" type="text" id="title" value="") 
     p
       label(for="author") Author 
-      input(name="author" type="text" id="author")
+      if enteredValues 
+        input(name="author" type="text" id="author" value=`${enteredValues.author}`) 
+      else 
+        input(name="author" type="text" id="author") 
     p 
       label(for="genre") Genre 
-      input(name="genre" type="text" id="genre" )
+      if enteredValues 
+        input(name="genre" type="text" id="genre" value=`${enteredValues.genre}`)  
+      else 
+        input(name="genre" type="text" id="genre")  
     p
       label(for="year") Year
-      input(name="year" type="number" id="year")
+      if enteredValues
+        input(name="year" type="number" id="year" value=`${enteredValues.year}`)
+      else
+        input(name="year" type="number" id="year")
     p 
       input(type="submit" value="Create New Book")
     p 
