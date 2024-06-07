@@ -28,6 +28,8 @@ block content
     a(class="button prev" href=`/books?page=${currentPage - 1}&limit=${pageSize}`) Previous
   if currentPage < totalPages 
     a(class="button next" href=`/books?page=${currentPage + 1}&limit=${pageSize}`) Next 
+  if search 
+    a(class="button" href="/books") Back to home
 
  
 
