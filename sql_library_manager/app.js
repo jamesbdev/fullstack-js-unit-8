@@ -67,7 +67,7 @@ app.get('/search', async (req, res) => {
       }
     })
     //show index file and pass in books
-    res.render('index', {books: books});
+    res.render('index', {books: books, search: true});
   } catch (error) {
     console.log('this search does not return a book', error);
   }
