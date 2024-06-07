@@ -109,3 +109,12 @@ form input[type="submit"].submit-btn {
   justify-content: center;
   margin-bottom: 30px;
 }
+
+
+table {
+  margin-bottom: 30px;
+}
+
+.prev {
+  margin-right: 10px;
+}

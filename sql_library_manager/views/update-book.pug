@@ -15,16 +15,28 @@ block content
             li Author is required
     p  
       label(for="title") Title
-      input(name="title" type="text" id="title")
+      if formData
+        input(name="title" type="text" id="title" value=`${formData.title}`)
+      else
+        input(name="title" type="text" id="title")
     p
       label(for="author") Author 
-      input(name="author" type="text" id="author")
+      if formData
+        input(name="author" type="text" id="author" value=`${formData.author}`)
+      else 
+        input(name="author" type="text" id="author")
     p 
       label(for="genre") Genre 
-      input(name="genre" type="text" id="genre" )
+      if formData 
+        input(name="genre" type="text" id="genre" value=`${formData.genre}`)
+      else 
+        input(name="genre" type="text" id="genre" )
     p
       label(for="year") Year
-      input(name="year" type="number" id="year")
+      if formData
+        input(name="year" type="number" id="year" value=`${formData.year}`)
+      else 
+        input(name="year" type="number" id="year")
     p 
       input(type="submit" value="Update Book")
 

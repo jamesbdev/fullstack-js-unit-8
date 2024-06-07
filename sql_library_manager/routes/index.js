@@ -13,15 +13,21 @@ router.get('/', function(req, res, next) {
 
 //show home page with list of books
 router.get('/books', async function(req, res, next){
-  //display all books
+  //pagination 
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit; 
   try {
-    const books = await Book.findAll();
+    const {count, rows: books} = await Book.findAndCountAll({
+      offset,
+      limit
+    })
+    const totalPages = Math.ceil(count/limit);
     //show the template and pass the books 
-    res.render('index', {title: "Books", books: books });
+    res.render('index', {title: "Books", books, totalItems: count, totalPages, currentPage: page, pageSize: limit });
   } catch (error) {
     console.log('There is an error', error);
   }
-
 }) 
 
 //get the new book page
@@ -85,7 +91,7 @@ router.post('/books/:id', async function(req, res, next) {
     //check if error is Sequelize error 
     if(error.name === "SequelizeValidationError") {
       //show template with form error
-      res.render('update-book', {title: "Update Book", errors: error.errors})
+      res.render('update-book', {title: "Update Book", errors: error.errors, formData: req.body})
     } else {
       console.log("Sorry, there is an error when updating the book", error);
     }

@@ -24,6 +24,10 @@ block content
           td=book.author
           td=book.genre 
           td=book.year
+  if currentPage > 1  
+    a(class="button prev" href=`/books?page=${currentPage - 1}&limit=${pageSize}`) Previous
+  if currentPage < totalPages 
+    a(class="button next" href=`/books?page=${currentPage + 1}&limit=${pageSize}`) Next 
 
  
 
